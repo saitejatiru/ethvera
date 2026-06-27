@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethvera by Adyu — Coming Soon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F7F3EC;
+    --cream-deep:#EFE8DC;
+    --ink:#2B2724;
+    --ink-soft:#6A625A;
+    --terracotta:#C76B4A;
+    --marigold:#E0A33E;
+    --sage:#8A9A7B;
+    --indigo:#33415C;
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'DM Sans',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:auto;}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--cream);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* ---------- THE SITE (blurred, scrolls behind) ---------- */
+  .site{position:relative;z-index:1;}
+
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:26px clamp(20px,6vw,80px);
+  }
+  nav .logo{font-family:var(--serif);font-size:24px;font-weight:600;letter-spacing:.5px;}
+  nav ul{display:flex;gap:30px;list-style:none;font-size:14px;color:var(--ink-soft);}
+
+  .hero{
+    min-height:92vh;display:flex;flex-direction:column;justify-content:center;
+    padding:0 clamp(20px,6vw,80px);
+    background:
+      radial-gradient(120% 90% at 80% 20%, rgba(224,163,62,.20), transparent 55%),
+      radial-gradient(120% 90% at 10% 90%, rgba(199,107,74,.20), transparent 55%),
+      var(--cream);
+  }
+  .hero h1{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(48px,9vw,128px);line-height:.98;letter-spacing:-1px;max-width:14ch;
+  }
+  .hero h1 em{font-style:italic;color:var(--terracotta);}
+  .hero p{margin-top:28px;font-size:clamp(16px,1.6vw,20px);color:var(--ink-soft);max-width:40ch;}
+
+  .strip{
+    padding:clamp(60px,9vw,120px) clamp(20px,6vw,80px);text-align:center;
+    background:var(--cream-deep);
+  }
+  .strip p{font-family:var(--serif);font-size:clamp(24px,3.4vw,42px);font-weight:400;line-height:1.3;max-width:22ch;margin:0 auto;}
+
+  .work{padding:clamp(50px,7vw,100px) clamp(20px,6vw,80px);}
+  .work .eyebrow{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-soft);margin-bottom:30px;}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .tile{aspect-ratio:3/4;border-radius:4px;position:relative;overflow:hidden;}
+  .tile span{position:absolute;left:16px;bottom:14px;font-family:var(--serif);font-size:18px;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.3);}
+  .t1{background:linear-gradient(150deg,#C76B4A,#9c4f34);}
+  .t2{background:linear-gradient(150deg,#8A9A7B,#5f7050);}
+  .t3{background:linear-gradient(150deg,#E0A33E,#bb7f1f);}
+
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;padding:clamp(50px,7vw,100px) clamp(20px,6vw,80px);background:var(--cream-deep);}
+  .trio h3{font-family:var(--serif);font-size:24px;font-weight:500;margin-bottom:12px;}
+  .trio p{color:var(--ink-soft);font-size:15px;line-height:1.6;}
+  .trio .dot{width:34px;height:34px;border-radius:50%;margin-bottom:18px;}
+
+  .story{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:clamp(50px,7vw,100px) clamp(20px,6vw,80px);}
+  .story .img{aspect-ratio:4/5;border-radius:4px;background:linear-gradient(150deg,#33415C,#1f2940);}
+  .story h2{font-family:var(--serif);font-size:clamp(30px,4vw,52px);font-weight:400;line-height:1.1;margin-bottom:20px;}
+  .story p{color:var(--ink-soft);font-size:16px;line-height:1.7;max-width:42ch;}
+
+  footer{padding:60px clamp(20px,6vw,80px);background:var(--ink);color:var(--cream);}
+  footer .fline{font-family:var(--serif);font-size:26px;}
+
+  @media(max-width:760px){
+    nav ul{display:none;}
+    .grid,.trio{grid-template-columns:1fr 1fr;}
+    .story{grid-template-columns:1fr;gap:30px;}
+  }
+
+  /* ---------- COMING SOON OVERLAY (fixed, frosted glass) ---------- */
+  .overlay{
+    position:fixed;inset:0;z-index:50;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(247,243,236,.5);
+    -webkit-backdrop-filter:blur(8px) saturate(110%);
+    backdrop-filter:blur(8px) saturate(110%);
+    pointer-events:none;            /* let scroll pass through to the site */
+    text-align:center;
+    padding:24px;
+  }
+  .panel{
+    pointer-events:auto;            /* but the card itself is interactive */
+    max-width:560px;width:100%;
+    animation:rise 1s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+
+  .stamp{width:48px;height:48px;margin:0 auto 26px;opacity:.85;}
+  .panel .eyebrow{font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--ink-soft);margin-bottom:22px;}
+  .panel h1{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(52px,12vw,104px);line-height:.92;letter-spacing:-1.5px;
+  }
+  .panel h1 em{font-style:italic;color:var(--terracotta);}
+  .panel .sub{margin:26px auto 0;font-size:clamp(15px,1.7vw,18px);color:var(--ink-soft);line-height:1.6;max-width:34ch;}
+
+  .notify{display:flex;gap:10px;justify-content:center;margin:36px auto 0;max-width:420px;flex-wrap:wrap;}
+  .notify input{
+    flex:1;min-width:200px;padding:15px 18px;border:1px solid rgba(43,39,36,.18);
+    border-radius:40px;background:rgba(255,255,255,.55);font-family:var(--sans);font-size:15px;color:var(--ink);
+  }
+  .notify input:focus{outline:2px solid var(--terracotta);outline-offset:1px;}
+  .notify button{
+    padding:15px 26px;border:none;border-radius:40px;background:var(--terracotta);color:#fff;
+    font-family:var(--sans);font-size:15px;font-weight:500;cursor:pointer;transition:background .2s,transform .2s;
+  }
+  .notify button:hover{background:#b25b3c;transform:translateY(-1px);}
+  .note{margin-top:16px;font-size:13px;color:var(--ink-soft);min-height:18px;transition:color .2s;}
+  .panel .ig{margin-top:34px;font-size:14px;color:var(--ink-soft);letter-spacing:.3px;}
+  .panel .ig a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--terracotta);padding-bottom:2px;}
+
+  .scrollhint{
+    position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:60;
+    font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-soft);
+    pointer-events:none;animation:bob 2.4s ease-in-out infinite;
+  }
+  @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(5px);}}
+
+  @media(prefers-reduced-motion:reduce){
+    .panel,.scrollhint{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+  <!-- ====== THE ACTUAL SITE (blurs + scrolls behind the overlay) ====== -->
+  <div class="site" aria-hidden="true">
+    <nav>
+      <div class="logo">Ethvera</div>
+      <ul><li>The Craft</li><li>Gallery</li><li>About</li><li>Journal</li><li>Contact</li></ul>
+    </nav>
+
+    <header class="hero">
+      <h1>Coloured by nature.<br><em>Made by hand.</em></h1>
+      <p>Hand-printed clothing in natural dyes — kind to your skin, honest in the making.</p>
+    </header>
+
+    <section class="strip">
+      <p>We print by hand. We colour with plants. We keep the strange stuff off your skin.</p>
+    </section>
+
+    <section class="work">
+      <div class="eyebrow">The work</div>
+      <div class="grid">
+        <div class="tile t1"><span>The Marigold Wrap</span></div>
+        <div class="tile t2"><span>Sage Field Shirt</span></div>
+        <div class="tile t3"><span>Sunbaked Kaftan</span></div>
+      </div>
+    </section>
+
+    <section class="trio">
+      <div><div class="dot" style="background:var(--terracotta)"></div><h3>Hand-printed</h3><p>Pressed one mould at a time. No two alike — that's the point.</p></div>
+      <div><div class="dot" style="background:var(--sage)"></div><h3>Naturally dyed</h3><p>Colour from plants, not a lab. Gentle on skin.</p></div>
+      <div><div class="dot" style="background:var(--marigold)"></div><h3>Slow made</h3><p>Made to last, made with care, made in small batches.</p></div>
+    </section>
+
+    <section class="story">
+      <div class="img"></div>
+      <div>
+        <h2>Honest, all the way through</h2>
+        <p>Every Ethvera piece is a little uneven, a little human, and all the better for it. Slow to make. Lovely to wear.</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="fline">Made by hand. Coloured by nature.</div>
+    </footer>
+  </div>
+
+  <!-- ====== COMING SOON OVERLAY ====== -->
+  <div class="overlay">
+    <div class="panel">
+      <svg class="stamp" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 4c3 6 9 8 15 8-3 6-3 13 0 19-6 0-12 2-15 8-3-6-9-8-15-8 3-6 3-13 0-19 6 0 12-2 15-8Z" stroke="#C76B4A" stroke-width="1.5"/>
+        <circle cx="24" cy="24" r="5.5" stroke="#8A9A7B" stroke-width="1.5"/>
+      </svg>
+      <div class="eyebrow">Ethvera by Adyu</div>
+      <h1>Coming <em>Soon</em></h1>
+      <p class="sub">Hand-printed clothing in natural dyes. Something gentle is on its way.</p>
+
+      <div class="notify">
+        <input type="email" id="email" placeholder="Your email" aria-label="Your email">
+        <button id="notifyBtn">Keep me posted</button>
+      </div>
+      <div class="note" id="note"></div>
+
+      <div class="ig">Follow along <a href="#" target="_blank" rel="noopener">@ethverabyadyu</a></div>
+    </div>
+  </div>
+
+  <div class="scrollhint">Scroll</div>
+
+<script>
+  // Friendly (non-submitting) confirmation for the demo signup
+  const btn = document.getElementById('notifyBtn');
+  const email = document.getElementById('email');
+  const note = document.getElementById('note');
+  btn.addEventListener('click', () => {
+    const v = email.value.trim();
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    if(!ok){ note.style.color = '#C76B4A'; note.textContent = 'Pop in a valid email and we’ll let you know.'; return; }
+    note.style.color = '#6A625A';
+    note.textContent = 'Lovely — you’re on the list. Talk soon.';
+    email.value = '';
+  });
+
+  // Gentle ambient auto-scroll so the blurred site drifts behind the overlay.
+  // Pauses when the visitor takes over, then resumes.
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let dir = 1, paused = false, idle;
+  function loop(){
+    if(!paused){
+      const max = document.body.scrollHeight - window.innerHeight;
+      if(window.scrollY >= max - 1) dir = -1;
+      if(window.scrollY <= 0) dir = 1;
+      window.scrollBy(0, dir * 0.5);
+    }
+    requestAnimationFrame(loop);
+  }
+  ['wheel','touchstart','keydown'].forEach(ev =>
+    window.addEventListener(ev, () => {
+      paused = true; clearTimeout(idle);
+      idle = setTimeout(() => paused = false, 2600);
+    }, {passive:true})
+  );
+  if(!reduce) requestAnimationFrame(loop);
+</script>
+</body>
+</html>
